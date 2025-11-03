@@ -17,7 +17,9 @@ A structured breakdown of key security domains in Azure, aligned with best pract
 - **RBAC** – Role-Based Access Control for scoped permissions
   
   [🔍 Explore RBAC in depth →](https://github.com/Mubaarak1-git/secure-azure-foundations/tree/main/Code/identity-access-control)
-- **JIT Access** – Just-In-Time elevation to reduce attack surface  
+- **JIT Access** – Just-In-Time elevation to reduce attack surface
+  
+   [🔍 Explore JIT Access in depth →](https://github.com/Mubaarak1-git/secure-azure-foundations/tree/main/Code/identity-access-control)
 - **PIM** – Privileged Identity Management for sensitive roles  
 - **Conditional Access** – Policy-based access enforcement
 
