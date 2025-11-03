@@ -17,7 +17,7 @@ Azure RBAC is a fine-grained authorization system built on Azure Resource Manage
 ### 🧩 Core Concepts of RBAC
 
 #### 👤 Security Principal  
-An identity requesting access—can be a user, group, service principal, or managed identity.
+An identity requesting access can be a user, group, service principal, or managed identity.
 
 #### 📜 Role Definition  
 A set of permissions (Actions, NotActions, DataActions). Examples:  
@@ -108,8 +108,82 @@ A VM created in East Asia can be accessed by a team member in the U.S. because R
 Azure RBAC is **free** and included in your Azure subscription.
 
 ---
+## 🔐 Just-in-Time (JIT) VM Access – Defender for Cloud
+JIT access is a dynamic security control in Microsoft Defender for Cloud (Plan 2) that reduces attack surfaces by locking down inbound traffic to management ports (like RDP and SSH) and granting access only when needed.
 
-📌 *Coming soon: Visual walkthroughs of JIT & PIM flows in Azure Portal*
+### 🎯 What You Can Do with JIT Access
+- Block always-open RDP/SSH ports on Azure and AWS VMs
+
+- Allow temporary access for specific users, IPs, and timeframes
+
+- Enforce least privilege at the network level
+
+- Respond to Defender for Cloud recommendations for unhealthy VMs
+  
+### 🧩 Core Concepts of JIT Access
+#### 🔒 Target Ports
+Focuses on high-risk management ports:
+
+- RDP (3389)
+
+- SSH (22)
+
+- Others as defined by your workload
+
+#### 🧠 Access Logic
+JIT access follows a request-approve-expire model:
+
+1. Request: User initiates access to a locked port
+
+2. Approve: Defender for Cloud validates and opens ports temporarily
+
+3. Expire: Access auto-revokes after the defined time window
+
+### 📦 Scope of Enforcement
+JIT rules apply at the network layer, enforced via:
+
+- Network Security Groups (NSGs)
+
+- Azure Firewall rules
+  
+If existing rules already govern the port, they take precedence. Otherwise, JIT rules are prioritized.
+
+### 🔗 JIT Rule Assignments
+JIT access is granted by creating temporary inbound rules:
+
+- Scoped to specific ports, IP ranges, and durations
+
+- Managed via Azure Portal, CLI, PowerShell, or REST API
+
+- Automatically removed after expiration
+
+### 🧭 VM Categorization Logic
+Defender for Cloud scans supported VMs and:
+
+- Flags those without JIT as Unhealthy
+
+- Recommends enabling JIT for better posture
+
+- Supports both Azure and AWS environments
+
+### 🧮 Access Evaluation Formula
+JIT access = Requested Port + Approved IP + Time Window → Access granted Outside this formula → Access denied
+
+### 🌍 Where Is JIT Data Stored?
+JIT configurations are stored and enforced via Azure Resource Manager:
+
+- Globally replicated for resilience
+
+- Integrated with Defender for Cloud’s recommendation engine
+
+### 💸 License Requirements
+JIT access is available with:
+
+- **Microsoft Defender for Servers Plan 2**
+
+- Requires Defender for Cloud integration
+  
+📌 *Coming soon: Visual walkthroughs of PIM flows in Azure environment*
 
 
 
